@@ -15,7 +15,8 @@ export default class SearchableMovieReviewsContainer extends Component{
         }
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault();
         fetch(URL + `query=${this.state.searchTerm}` + `api-key=${NYT_API_KEY}`)
         .then((res) => res.json())
         .then(data => {
@@ -23,6 +24,7 @@ export default class SearchableMovieReviewsContainer extends Component{
                 reviews: data.results
             })
         })
+        .catch((err) => console.error(err))
     }
 
     handleChange = (e) => {
